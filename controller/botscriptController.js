@@ -5,15 +5,13 @@ exports.getScript = (req, cb) => {
   let regex = new RegExp(input)
   console.log('input', regex)
   Botscript.find({'title' : regex}, (err, docs) =>{
-    if (err) console.log('GET err: ', err)
-    cb(docs)
+    err ? cb(err) : cb(docs)
   })
 }
 
 exports.getAllScript = (cb) => {
   Botscript.find({'scriptJSON':/(?:)/}, (err, docs) =>{
-    if (err) console.log('GET err: ', err)
-    cb(docs)
+    err ? cb(err) : cb(docs)
   })
 }
 
@@ -23,11 +21,7 @@ exports.createScript = (req, cb) => {
   botscript.title = req.body.title
   botscript.scriptJSON = req.body.scriptJSON
   botscript.save((err, docs)=>{
-    if (err){
-      cb(err)
-    } else {
-      cb(docs);
-    }
+    err ? cb(err) : cb(docs)
   })
 }
 
@@ -40,7 +34,7 @@ exports.updateScript = (req, cb) => {
       cb(docs)
     })
   } else {
-    console.log(`Update err: didn't get id`)
+    console.log(`UPDATE err: didn't get id`)
   }
 }
 
@@ -48,10 +42,10 @@ exports.deleteScript = (req, cb) => {
   if (req.headers._id){
     let id = req.headers._id
     Botscript.findByIdAndRemove(id, (err, docs) =>{
-      if (err) console.log('UPDATE err: ', err)
+      if (err) console.log('DELETE err: ', err)
       cb(docs)
     })
   } else {
-    console.log(`Delete err: didn't get id`)
+    console.log(`DELETE err: didn't get id`)
   }
 }
