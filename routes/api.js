@@ -1,20 +1,27 @@
 var express = require('express');
 var router = express.Router();
+var botscriptController = require ('../controller/botscriptController')
 
-/* GET api listing. */
+
 router.get('/script.get:id', function(req, res, next) {
+  botscriptController.getScript();
   res.send('respond with a API resource');
 });
 
-router.get('/script.create', function(req, res, next) {
-  res.send('respond with a API resource created');
+router.post('/script.create', function(req, res, next) {
+  console.log(`body?`, req.body)
+  botscriptController.createScript(req, (botscript) => {
+    res.json(botscript)
+  });
 });
 
-router.get('/script.update', function(req, res, next) {
+router.put('/script.update', function(req, res, next) {
+  botscriptController.updateScript();
   res.send('respond with a API resource updated');
 });
 
-router.get('/script.delete', function(req, res, next) {
+router.delete('/script.delete', function(req, res, next) {
+  botscriptController.deleteScript();
   res.send('respond with a API resource deleted');
 });
 
