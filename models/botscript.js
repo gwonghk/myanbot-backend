@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var botscriptSchema = new mongoose.Schema({
-
-	scriptJSON: { type: String },
+	title: { type: String, required: true },
+	scriptJSON: { type: String, required: true },
 	updated: { type: Date, default: Date.now() }
 });
 
