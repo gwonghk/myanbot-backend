@@ -14,7 +14,7 @@ var app = express();
 //connect w/ MongoDB ***
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:3001/proj4chatbot');
+mongoose.connect('mongodb://localhost/proj4chatbot');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
